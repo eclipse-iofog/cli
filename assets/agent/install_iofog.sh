@@ -61,6 +61,10 @@ do_install_iofog() {
 			$sh_c "apt-get update"
 			$sh_c "apt-get install -y --allow-downgrades iofog-agent=$agent_version"
 			;;
+		mendel)
+			curl -s "https://${prefix}packagecloud.io/install/repositories/$repo/script.deb.sh" > ${PACKAGE_CLOUD_SCRIPT}
+			$sh_c "os=ubuntu dist=trusty ./${PACKAGE_CLOUD_SCRIPT}"
+			$sh_c "apt-get install -y --allow-downgrades iofog-agent=$agent_version"
 	esac
 
 	do_check_iofog_on_arm

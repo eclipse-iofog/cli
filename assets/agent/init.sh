@@ -48,6 +48,7 @@ armv7l-ubuntu-xenial
 armv7l-ubuntu-bionic
 armv7l-ubuntu-focal
 armv7l-ubuntu-artful
+aarch64-mendel-eagle
 "
 
 

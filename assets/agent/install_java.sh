@@ -26,7 +26,7 @@ do_install_java() {
 	$sh_c "tar xzf jdk-8u211$is_arm-$os_arch.tar.gz"
 	cd /opt/jdk1.8.0_211/	
 	case "$lsb_dist" in
-		debian|raspbian|ubuntu)
+		debian|raspbian|ubuntu|mendel)
 			$sh_c "update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_211/bin/java 1100"
 			;;		
 		fedora|centos)

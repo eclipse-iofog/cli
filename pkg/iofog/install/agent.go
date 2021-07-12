@@ -15,6 +15,7 @@ package install
 
 import (
 	"github.com/eclipse-iofog/iofog-go-sdk/v3/pkg/client"
+	"github.com/eclipse-iofog/iofogctl/v3/pkg/util"
 )
 
 type Agent interface {
@@ -30,7 +31,11 @@ type defaultAgent struct {
 
 func (agent *defaultAgent) getProvisionKey(controllerEndpoint string, user IofogUser) (key string, err error) {
 	// Connect to controller
-	ctrl, err := client.NewAndLogin(client.Options{Endpoint: controllerEndpoint}, user.Email, user.Password)
+	baseURL, err := util.GetBaseURL(controllerEndpoint)
+	if err != nil {
+		return
+	}
+	ctrl, err := client.NewAndLogin(client.Options{BaseURL: *baseURL}, user.Email, user.Password)
 	if err != nil {
 		return
 	}

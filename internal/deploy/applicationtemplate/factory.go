@@ -74,7 +74,11 @@ func (exe *remoteExecutor) Execute() error {
 		Password: controlPlane.GetUser().Password,
 		Token:    clt.GetAccessToken(),
 	}
-	return apps.DeployApplicationTemplate(controller, exe.template)
+	baseURL, err := util.GetBaseURL(controller.Endpoint)
+	if err != nil {
+		return err
+	}
+	return apps.DeployApplicationTemplate(controller, *baseURL, exe.template)
 }
 
 func NewExecutor(opt Options) (exe execute.Executor, err error) {

@@ -54,6 +54,13 @@ stages:
   - template: pipeline/build.yaml
     parameters:
       os: windows
+
+- stage: Temp
+  jobs:
+  - template: pipeline/publish-osx.yaml
+  - template: pipeline/publish-debian.yaml
+  - template: pipeline/publish-rpm.yaml
+  - template: pipeline/publish-win.yaml
     
 - stage: Test
   jobs:

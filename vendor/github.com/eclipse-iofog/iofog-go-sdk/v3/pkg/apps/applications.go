@@ -14,6 +14,9 @@
 package apps
 
 import (
+	"fmt"
+	"net/url"
+
 	"github.com/eclipse-iofog/iofog-go-sdk/v3/pkg/client"
 )
 
@@ -76,10 +79,14 @@ func (exe *applicationExecutor) execute() (err error) {
 }
 
 func (exe *applicationExecutor) init() (err error) {
+	baseURL, err := url.Parse(exe.controller.Endpoint)
+	if err != nil {
+		return fmt.Errorf(errParseControllerURL, err.Error())
+	}
 	if exe.controller.Token != "" {
-		exe.client, err = client.NewWithToken(client.Options{Endpoint: exe.controller.Endpoint}, exe.controller.Token)
+		exe.client, err = client.NewWithToken(client.Options{BaseURL: *baseURL}, exe.controller.Token)
 	} else {
-		exe.client, err = client.NewAndLogin(client.Options{Endpoint: exe.controller.Endpoint}, exe.controller.Email, exe.controller.Password)
+		exe.client, err = client.NewAndLogin(client.Options{BaseURL: *baseURL}, exe.controller.Email, exe.controller.Password)
 	}
 	if err != nil {
 		return

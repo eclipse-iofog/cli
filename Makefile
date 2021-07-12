@@ -20,12 +20,12 @@ LDFLAGS += -X $(PREFIX).operatorTag=develop
 LDFLAGS += -X $(PREFIX).proxyTag=develop
 LDFLAGS += -X $(PREFIX).routerTag=develop
 LDFLAGS += -X $(PREFIX).controllerTag=develop
-LDFLAGS += -X $(PREFIX).agentTag=develop
+LDFLAGS += -X $(PREFIX).agentTag=3.0.0-dev-b14126 # CA certs fix
 LDFLAGS += -X $(PREFIX).controllerVersion=0.0.0-dev
-LDFLAGS += -X $(PREFIX).agentVersion=0.0.0-dev
+LDFLAGS += -X $(PREFIX).agentVersion=3.0.0-dev-b14126 # CA certs fix
 LDFLAGS += -X $(PREFIX).repo=gcr.io/focal-freedom-236620
-GO_SDK_MODULE = iofog-go-sdk/v3@develop
-OPERATOR_MODULE = iofog-operator/v3@develop
+GO_SDK_MODULE = iofog-go-sdk/v3@7192f877049e0ceb93c41f2a9a268342e904b47a
+OPERATOR_MODULE = iofog-operator/v3@c39e28894350a0ad83ca6e841fa479aa0d6619e4
 REPORTS_DIR ?= reports
 TEST_RESULTS ?= TEST-iofogctl.txt
 TEST_REPORT ?= TEST-iofogctl.xml

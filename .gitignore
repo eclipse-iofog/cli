@@ -7,3 +7,4 @@ test.txt
 test-report.xml
 
 *rice-box.go
+.vscode/*

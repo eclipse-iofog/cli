@@ -308,7 +308,11 @@ func (ctrl *Controller) Stop() (err error) {
 }
 
 func WaitForControllerAPI(endpoint string) (err error) {
-	ctrlClient := client.New(client.Options{Endpoint: endpoint})
+	baseURL, err := util.GetBaseURL(endpoint)
+	if err != nil {
+		return err
+	}
+	ctrlClient := client.New(client.Options{BaseURL: *baseURL})
 
 	seconds := 0
 	for seconds < 60 {

@@ -196,7 +196,11 @@ func newControllerClient(namespace string) (*client.Client, error) {
 	}
 
 	user := controlPlane.GetUser()
-	cachedClient, err := client.NewAndLogin(client.Options{Endpoint: endpoint}, user.Email, user.GetRawPassword())
+	baseURL, err := util.GetBaseURL(endpoint)
+	if err != nil {
+		return nil, err
+	}
+	cachedClient, err := client.NewAndLogin(client.Options{BaseURL: *baseURL}, user.Email, user.GetRawPassword())
 	if err != nil {
 		return nil, err
 	}
